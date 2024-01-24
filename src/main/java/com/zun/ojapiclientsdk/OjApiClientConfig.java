@@ -1,5 +1,6 @@
 package com.zun.ojapiclientsdk;
 
+import cn.hutool.core.util.StrUtil;
 import com.zun.ojapiclientsdk.client.OjApiClient;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,8 +18,10 @@ public class OjApiClientConfig {
 
     private String secretKey;
 
+    private String apiGatewayUrl;
+
     @Bean
     public OjApiClient ojApiClient() {
-        return new OjApiClient(accessKey, secretKey);
+        return new OjApiClient(accessKey, secretKey, apiGatewayUrl);
     }
 }

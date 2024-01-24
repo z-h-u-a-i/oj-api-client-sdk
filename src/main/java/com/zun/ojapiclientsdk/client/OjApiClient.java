@@ -15,15 +15,16 @@ import java.util.Map;
 
 public class OjApiClient {
 
-    private String accessKey;
+    private final String accessKey;
 
-    private String secretKey;
+    private final String secretKey;
 
-    public static final String API_GATEWAY_HOST = "localhost:9000";
+    public  final String apiGatewayUrl;
 
-    public OjApiClient(String accessKey, String secretKey) {
+    public OjApiClient(String accessKey, String secretKey, String apiGatewayUrl) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
+        this.apiGatewayUrl = apiGatewayUrl;
     }
 
     /**
@@ -64,7 +65,7 @@ public class OjApiClient {
     public ExecuteCodeResponse execCodeAcmPattern(ExecuteCodeRequest executeCodeRequest) {
         //将用户对象转换为JS0N字符串
         String json = JSONUtil.toJsonStr(executeCodeRequest);
-        HttpResponse httpResponse = HttpRequest.post("http://" + API_GATEWAY_HOST + "/open/exec/java/native/acm")
+        HttpResponse httpResponse = HttpRequest.post("http://" + apiGatewayUrl + "/open/exec/java/native/acm")
                 //添加请求头
                 .addHeaders(getHeaderMap(json))
                 //设置请求体
@@ -87,7 +88,7 @@ public class OjApiClient {
     public ExecuteCodeResponse execCodeArgsPattern(ExecuteCodeRequest executeCodeRequest) {
         //将用户对象转换为]S0N字符串
         String json = JSONUtil.toJsonStr(executeCodeRequest);
-        HttpResponse httpResponse = HttpRequest.post("http://" + API_GATEWAY_HOST + "/open/exec/java/native/args")
+        HttpResponse httpResponse = HttpRequest.post("http://" + apiGatewayUrl + "/open/exec/java/native/args")
                 //添加请求头
                 .addHeaders(getHeaderMap(json))
                 //设置请求体
